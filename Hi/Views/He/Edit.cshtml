@@ -1,0 +1,18 @@
+﻿@model Class
+
+<form asp-action="Edit">
+    <div class="for-group">
+        <label asp-for="Material">New Material</label>
+        <input type="text" asp-for="Material" class="form-control" />
+        <span asp-validation-for="Material" class="text-danger"></span>
+    </div>
+    <div class="for-group">
+        <label asp-for="DrName">New Dr Name</label>
+        <input type="text" asp-for="DrName" class="form-control" />
+        <span asp-validation-for="DrName" class="text-danger"></span>
+    </div>
+
+    <br />
+    <input type="submit" class="btn btn-primary" class="form-control" value="Save" />
+
+</form>

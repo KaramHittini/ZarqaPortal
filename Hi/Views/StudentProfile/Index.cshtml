@@ -6,51 +6,90 @@
 
 <style>
     body {
-        background: linear-gradient(to bottom, #000000, #1e3c72, #6fb1e8)
+        background: linear-gradient(to bottom, #000000, #1e3c72, #6fb1e8);
+        min-height: 100vh;
     }
 
     .profile-container {
         max-width: 500px;
         margin: 50px auto;
     }
+
+    .profile-card {
+        border-radius: 15px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+    }
+
+    .profile-header {
+        background: linear-gradient(135deg, #1e3c72, #2a5298);
+        padding: 30px;
+    }
+
+    .profile-avatar {
+        width: 100px;
+        height: 100px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 15px;
+        font-size: 2.5rem;
+    }
+
+    .stat-badge {
+        font-size: 1.2rem;
+        padding: 8px 16px;
+    }
 </style>
 
 <div class="container">
     <div class="profile-container">
-        <div class="card shadow">
-            <div class="card-header bg-primary text-white text-center">
-                <h4 class="mb-0">Student Profile</h4>
-            </div>
-            <div class="card-body text-center">
-                <div class="mb-3">
-                    <img src="https://via.placeholder.com/100" class="rounded-circle" alt="Profile Photo" />
+        <div class="card profile-card">
+            <div class="profile-header text-white text-center">
+                <div class="profile-avatar">
+                    <i class="bi bi-person-fill text-white"></i>
                 </div>
-                <h5 class="card-title">@Model.FullName</h5>
-                <p class="text-muted">@Model.Major</p>
+                <h3 class="mb-1">@Model.FullName</h3>
+                <p class="mb-0 opacity-75">@Model.Major</p>
             </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item d-flex justify-content-between">
-                    <span><strong>Student ID:</strong></span>
-                    <span>@Model.StudentId</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between">
-                    <span><strong>College:</strong></span>
-                    <span>@Model.College</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between">
-                    <span><strong>GPA:</strong></span>
-                    <span class="badge bg-success">@Model.Gpa.ToString("F2")</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between">
-                    <span><strong>Completed Hours:</strong></span>
-                    <span>@Model.CompletedHours</span>
-                </li>
-            </ul>
-            <div class="card-footer text-center">
-                <a asp-controller="Courses" asp-action="Index" class="btn btn-primary">
-                    View Available Courses
-                </a>
+            <div class="card-body p-0">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-center py-3">
+                        <span><i class="bi bi-person-badge me-2 text-primary"></i><strong>Student ID</strong></span>
+                        <span class="text-muted">@Model.StudentId</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center py-3">
+                        <span><i class="bi bi-building me-2 text-primary"></i><strong>College</strong></span>
+                        <span class="text-muted">@Model.College</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center py-3">
+                        <span><i class="bi bi-graph-up me-2 text-primary"></i><strong>GPA</strong></span>
+                        <span class="badge bg-success stat-badge">@Model.Gpa.ToString("F2")</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center py-3">
+                        <span><i class="bi bi-clock-history me-2 text-primary"></i><strong>Completed Hours</strong></span>
+                        <span class="badge bg-info stat-badge">@Model.CompletedHours</span>
+                    </li>
+                </ul>
             </div>
+            <div class="card-footer bg-light p-3">
+                <div class="d-grid gap-2">
+                    <a asp-controller="Schedule" asp-action="Index" class="btn btn-primary">
+                        <i class="bi bi-calendar3 me-2"></i>View My Schedule
+                    </a>
+                    <a asp-controller="Courses" asp-action="Index" class="btn btn-outline-primary">
+                        <i class="bi bi-book me-2"></i>Browse Available Courses
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <a asp-controller="Auth" asp-action="Logout" class="text-white text-decoration-none">
+                <i class="bi bi-box-arrow-left me-1"></i>Logout
+            </a>
         </div>
     </div>
 </div>

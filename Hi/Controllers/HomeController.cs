@@ -33,6 +33,19 @@ public class HomeController : Controller
     }
 
     /// <summary>
+    /// Displays the admin profile page.
+    /// </summary>
+    public IActionResult AdminProfile()
+    {
+        var role = HttpContext.Session.GetString("Role");
+        if (role != "Admin")
+        {
+            return RedirectToAction("Login", "Auth");
+        }
+        return View();
+    }
+
+    /// <summary>
     /// Displays the privacy policy page.
     /// </summary>
     public IActionResult Privacy()

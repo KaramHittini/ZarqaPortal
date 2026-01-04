@@ -2,6 +2,7 @@ namespace ZarqaPortal.Web.Controllers;
 
 using Microsoft.AspNetCore.Mvc;
 using ZarqaPortal.Web.Core.Entities;
+using ZarqaPortal.Web.Features.Authentication.Services;
 using ZarqaPortal.Web.Features.Students.Services;
 
 /// <summary>
@@ -10,29 +11,55 @@ using ZarqaPortal.Web.Features.Students.Services;
 public class StudentProfileController : Controller
 {
     private readonly IStudentProfileService _profileService;
+    private readonly IAuthService _authService;
     private readonly ILogger<StudentProfileController> _logger;
 
-    public StudentProfileController(IStudentProfileService profileService, ILogger<StudentProfileController> logger)
+    public StudentProfileController(
+        IStudentProfileService profileService, 
+        IAuthService authService,
+        ILogger<StudentProfileController> logger)
     {
         _profileService = profileService;
+        _authService = authService;
         _logger = logger;
     }
 
     /// <summary>
-    /// Displays the student profile.
+    /// Displays the student profile for the logged-in user.
     /// </summary>
-    public async Task<IActionResult> Index(CancellationToken cancellationToken)
+    public IActionResult Index()
     {
-        // TODO: Get user ID from authentication claims
-        // For now, using a demo profile
+        var username = HttpContext.Session.GetString("Username");
+        var role = HttpContext.Session.GetString("Role");
+
+        if (string.IsNullOrEmpty(username))
+        {
+            return RedirectToAction("Login", "Auth");
+        }
+
+        // Admin shouldn't access student profile
+        if (role == "Admin")
+        {
+            return RedirectToAction("Index", "Courses");
+        }
+
+        // Get the student profile from AuthService
+        var profileData = _authService.GetStudentProfile(username);
+
+        if (profileData is null)
+        {
+            _logger.LogWarning("No profile found for user {Username}", username);
+            return NotFound();
+        }
+
         var profile = new StudentProfile
         {
-            FullName = "Mustafa Alhamad",
-            StudentId = "202301969",
-            Major = "Cyber Security",
-            College = "IT",
-            Gpa = 3.35,
-            CompletedHours = 95
+            FullName = profileData.Value.FullName,
+            StudentId = profileData.Value.StudentId,
+            Major = profileData.Value.Major,
+            College = profileData.Value.College,
+            Gpa = profileData.Value.Gpa,
+            CompletedHours = profileData.Value.CompletedHours
         };
 
         return View(profile);

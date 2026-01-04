@@ -1,0 +1,124 @@
+@model ZarqaPortal.Web.Features.Authentication.ViewModels.LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<style>
+    body {
+        background: linear-gradient(to bottom, #000000, #1e3c72, #6fb1e8);
+        min-height: 100vh;
+    }
+
+    .login-container {
+        max-width: 400px;
+        margin: 80px auto;
+    }
+
+    .login-card {
+        border-radius: 15px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .login-header {
+        background: linear-gradient(135deg, #1e3c72, #2a5298);
+        border-radius: 15px 15px 0 0;
+        padding: 30px;
+    }
+
+    .login-header h2 {
+        margin: 0;
+        font-weight: 600;
+    }
+
+    .login-body {
+        padding: 40px 30px;
+    }
+
+    .form-control {
+        border-radius: 8px;
+        padding: 12px 15px;
+        border: 2px solid #e0e0e0;
+        transition: border-color 0.3s;
+    }
+
+    .form-control:focus {
+        border-color: #1e3c72;
+        box-shadow: 0 0 0 3px rgba(30, 60, 114, 0.1);
+    }
+
+    .btn-login {
+        background: linear-gradient(135deg, #1e3c72, #2a5298);
+        border: none;
+        border-radius: 8px;
+        padding: 12px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-login:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 20px rgba(30, 60, 114, 0.4);
+    }
+
+    .form-label {
+        font-weight: 500;
+        color: #333;
+    }
+
+    .university-logo {
+        font-size: 3rem;
+        margin-bottom: 10px;
+    }
+</style>
+
+<div class="container">
+    <div class="login-container">
+        <div class="card login-card">
+            <div class="login-header text-white text-center">
+                <div class="university-logo">🎓</div>
+                <h2>Zarqa University Portal</h2>
+                <p class="mb-0 mt-2 opacity-75">Sign in to your account</p>
+            </div>
+            <div class="login-body">
+                <form asp-action="Login" method="post">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                    <div class="mb-4">
+                        <label asp-for="Username" class="form-label"></label>
+                        <input asp-for="Username" class="form-control" placeholder="Enter your username" autocomplete="username" />
+                        <span asp-validation-for="Username" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="Password" class="form-label"></label>
+                        <input asp-for="Password" class="form-control" placeholder="Enter your password" autocomplete="current-password" />
+                        <span asp-validation-for="Password" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-4 form-check">
+                        <input asp-for="RememberMe" class="form-check-input" />
+                        <label asp-for="RememberMe" class="form-check-label"></label>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-login">
+                            <i class="bi bi-box-arrow-in-right me-2"></i>Sign In
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <a asp-controller="Home" asp-action="Welcome" class="text-white text-decoration-none">
+                <i class="bi bi-arrow-left me-1"></i>Back to Home
+            </a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

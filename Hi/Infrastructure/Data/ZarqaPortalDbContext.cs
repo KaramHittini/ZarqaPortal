@@ -28,6 +28,11 @@ public class ZarqaPortalDbContext : DbContext
     /// </summary>
     public DbSet<StudentProfile> StudentProfiles => Set<StudentProfile>();
 
+    /// <summary>
+    /// Gets or sets the student schedules in the database.
+    /// </summary>
+    public DbSet<StudentSchedule> StudentSchedules => Set<StudentSchedule>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -53,6 +58,16 @@ public class ZarqaPortalDbContext : DbContext
         modelBuilder.Entity<Course>(entity =>
         {
             entity.HasIndex(e => e.Name);
+        });
+
+        // Configure StudentSchedule entity
+        modelBuilder.Entity<StudentSchedule>(entity =>
+        {
+            entity.HasIndex(e => new { e.Username, e.CourseId }).IsUnique();
+            entity.HasOne(e => e.Course)
+                  .WithMany()
+                  .HasForeignKey(e => e.CourseId)
+                  .OnDelete(DeleteBehavior.Cascade);
         });
     }
 }

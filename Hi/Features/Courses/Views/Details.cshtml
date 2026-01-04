@@ -1,0 +1,41 @@
+@model ZarqaPortal.Web.Core.Entities.Course
+
+@{
+    ViewData["Title"] = "Course Details";
+}
+
+<style>
+    body {
+        background: linear-gradient(to bottom, #000000, #1e3c72, #6fb1e8)
+    }
+</style>
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Course Details</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">Course ID</dt>
+                <dd class="col-sm-9">@Model.Id</dd>
+
+                <dt class="col-sm-3">Course Name</dt>
+                <dd class="col-sm-9">@Model.Name</dd>
+
+                <dt class="col-sm-3">Description</dt>
+                <dd class="col-sm-9">@(Model.Description ?? "No description available")</dd>
+
+                <dt class="col-sm-3">Instructor</dt>
+                <dd class="col-sm-9">@Model.InstructorName</dd>
+
+                <dt class="col-sm-3">Credit Hours</dt>
+                <dd class="col-sm-9">@Model.CreditHours</dd>
+            </dl>
+        </div>
+        <div class="card-footer">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary">Edit</a>
+            <a asp-action="Index" class="btn btn-primary">Back to List</a>
+        </div>
+    </div>
+</div>

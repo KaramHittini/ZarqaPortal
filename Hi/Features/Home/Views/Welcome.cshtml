@@ -1,0 +1,131 @@
+@{
+    ViewData["Title"] = "Educational Portal";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Zarqa Portal - Welcome</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            background: linear-gradient(to bottom, #bfe6f2, #3f7fd9, #000);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            display: flex;
+            gap: 40px;
+            padding: 20px;
+        }
+
+        .left-panel {
+            flex: 1;
+            padding: 60px 40px;
+            border-radius: 40px;
+            background: linear-gradient(to bottom, #8fc6ff, #1f4fa8, #000);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 500px;
+        }
+
+        .left-panel small {
+            letter-spacing: 3px;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        .left-panel h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            font-weight: 700;
+        }
+
+        .login-btn {
+            display: inline-block;
+            width: 150px;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #2f6cff, #1a4fd6);
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(47, 108, 255, 0.4);
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(47, 108, 255, 0.6);
+            color: white;
+        }
+
+        .right-panel {
+            flex: 1;
+            border-radius: 40px;
+            overflow: hidden;
+            background: linear-gradient(to bottom, #1e3c72, #2a5298);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .right-panel .university-logo {
+            max-width: 80%;
+            opacity: 0.7;
+        }
+
+        @@media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .left-panel h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <small>ZARQA UNIVERSITY</small>
+
+            <h1>
+                Your<br />
+                Educational<br />
+                Portal
+            </h1>
+
+            <a asp-action="Index" class="login-btn">Enter Portal</a>
+        </div>
+
+        <div class="right-panel">
+            <div class="text-center text-white p-4">
+                <h2 class="mb-4">🎓</h2>
+                <h3>Zarqa University</h3>
+                <p class="mt-3 opacity-75">Excellence in Education</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,33 +1,51 @@
+namespace ZarqaPortal.Web.Controllers;
+
 using System.Diagnostics;
-using Hi.Models;
 using Microsoft.AspNetCore.Mvc;
+using ZarqaPortal.Web.Shared.ViewModels;
 
-namespace Hi.Controllers
+/// <summary>
+/// Controller for home and general pages.
+/// </summary>
+public class HomeController : Controller
 {
-    public class HomeController : Controller
+    private readonly ILogger<HomeController> _logger;
+
+    public HomeController(ILogger<HomeController> logger)
     {
-        private readonly ILogger<HomeController> _logger;
+        _logger = logger;
+    }
 
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
+    /// <summary>
+    /// Displays the home/index page.
+    /// </summary>
+    public IActionResult Index()
+    {
+        return View();
+    }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+    /// <summary>
+    /// Displays the welcome page.
+    /// </summary>
+    public IActionResult Welcome()
+    {
+        return View();
+    }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+    /// <summary>
+    /// Displays the privacy policy page.
+    /// </summary>
+    public IActionResult Privacy()
+    {
+        return View();
+    }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
+    /// <summary>
+    /// Displays the error page.
+    /// </summary>
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult Error()
+    {
+        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }
